@@ -27,6 +27,7 @@ with open('herbloreIngredients.csv') as f:
         fourDosePotId = int(row[5])
         dosesMade = int(row[6])
         potsPerHour = int(row[7])
+        levelReq = int(row[8])
 
         # Calculate instant buy/sell without amulet
         potionSellPrice = itemDict[fourDosePotId]['lowPrice'] * (dosesMade/4)
@@ -61,9 +62,9 @@ with open('herbloreIngredients.csv') as f:
         else:
             gpPerXpPatientAmulet = 0
 
-        print(itemDict[fourDosePotId]['name'].ljust(30) + 'w/o Amulet: ' + "{:.2f}".format(gpPerXpInstant).rjust(6) + ' to ' + "{:.2f}".format(gpPerXpPatient).rjust(6) + \
-            '\twith Amulet: ' + "{:.2f}".format(gpPerXpInstantAmulet).rjust(6) + ' to ' + "{:.2f}".format(gpPerXpPatientAmulet).rjust(6) + \
-            '\tXp/Hr: ' + "{:,}".format(xpPerHour).rjust(7))
+        print(itemDict[fourDosePotId]['name'].ljust(30) + '(' + str(levelReq) + ' required)' + '\tXp/Hr: ' + "{:,}".format(xpPerHour).rjust(7))
+        print('GP/XP: w/o Amulet: ' + "{:.2f}".format(gpPerXpInstant).rjust(6) + ' to ' + "{:.2f}".format(gpPerXpPatient).rjust(6) + \
+            '\twith Amulet: ' + "{:.2f}".format(gpPerXpInstantAmulet).rjust(6) + ' to ' + "{:.2f}".format(gpPerXpPatientAmulet).rjust(6))
 
         print('Base: ' + getItemDetails(baseIngId) + ' gp \tSecondary: ' + getItemDetails(secondaryIngId) + ' gp \tPotion: ' + getItemDetails(fourDosePotId) + ' gp')
         print()
