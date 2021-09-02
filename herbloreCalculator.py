@@ -4,6 +4,9 @@ import csv
 from datetime import datetime
 from getItemData import get_all_item_data
 
+def getItemDetails(itemId):
+    return itemDict[itemId]['name'] + ' ' + str(itemDict[itemId]['lowPrice']) + '-' + str(itemDict[itemId]['highPrice'])
+
 itemDict = get_all_item_data()
 
 # Find amulet of chemistry price
@@ -44,25 +47,23 @@ with open('herbloreIngredients.csv') as f:
         if dosesMade == 3:
             potionSellPrice = (0.95 * itemDict[fourDosePotId]['lowPrice'] * (3/4)) + (0.05 * itemDict[fourDosePotId]['lowPrice'])
             ingredientBuyPrice = itemDict[baseIngId]['highPrice'] + (itemDict[secondaryIngId]['highPrice'] * quantityIngreds)
-            profitPerPot = potionSellPrice - ingredientBuyPrice
+            profitPerPot = potionSellPrice - ingredientBuyPrice - (amuletPrice / 100)
             gpPerXpInstantAmulet = round(profitPerPot / xp, 2)
         else:
-            gpPerXpInstantAmulet = 10
+            gpPerXpInstantAmulet = 0
 
         # Calculate patient buy/sell with amulet
         if dosesMade == 3:
             potionSellPrice = (0.95 * itemDict[fourDosePotId]['highPrice'] * (3/4)) + (0.05 * itemDict[fourDosePotId]['highPrice'])
             ingredientBuyPrice = itemDict[baseIngId]['lowPrice'] + (itemDict[secondaryIngId]['lowPrice'] * quantityIngreds)
-            profitPerPot = potionSellPrice - ingredientBuyPrice
+            profitPerPot = potionSellPrice - ingredientBuyPrice - (amuletPrice / 100)
             gpPerXpPatientAmulet = round(profitPerPot / xp, 2)
         else:
-            gpPerXpPatientAmulet = 10
+            gpPerXpPatientAmulet = 0
 
-        print (itemDict[fourDosePotId]['name'].ljust(30) + 'Instant: ' + "{:.2f}".format(gpPerXpInstant).rjust(6) + \
-            '\tPatient: ' + "{:.2f}".format(gpPerXpPatient).rjust(6) + \
-            '\tInstant (w/Amulet): ' + "{:.2f}".format(gpPerXpInstantAmulet).rjust(6) + \
-            '\tPatient (w/Amulet): ' + "{:.2f}".format(gpPerXpPatientAmulet).rjust(6) + \
+        print(itemDict[fourDosePotId]['name'].ljust(30) + 'w/o Amulet: ' + "{:.2f}".format(gpPerXpInstant).rjust(6) + ' to ' + "{:.2f}".format(gpPerXpPatient).rjust(6) + \
+            '\twith Amulet: ' + "{:.2f}".format(gpPerXpInstantAmulet).rjust(6) + ' to ' + "{:.2f}".format(gpPerXpPatientAmulet).rjust(6) + \
             '\tXp/Hr: ' + "{:,}".format(xpPerHour).rjust(7))
 
-
-        #print(itemDict[potionId]['name'] + ' Sells For ' + str(potionSellPrice) + ', Ingredients Buy For ' + str(ingredientBuyPrice) + ', Profit Per Potion is ' + str(profitPerPot))
+        print('Base: ' + getItemDetails(baseIngId) + ' gp \tSecondary: ' + getItemDetails(secondaryIngId) + ' gp \tPotion: ' + getItemDetails(fourDosePotId) + ' gp')
+        print()
