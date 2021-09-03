@@ -12,6 +12,9 @@ itemDict = get_all_item_data()
 with open('herbs.csv') as f:
     reader = csv.reader(f)
     next(reader)
+
+    print('Cleaning Herbs Margins')
+
     for row in reader:
         cleanHerbId = int(row[0])
         grimyHerbId = int(row[1])
@@ -19,4 +22,4 @@ with open('herbs.csv') as f:
 
         #print(getItemDetails(cleanHerbId))
         #print(getItemDetails(grimyHerbId))
-        print(itemDict[cleanHerbId]['name'] + ': ' + str(itemDict[grimyHerbId]['highPrice']-itemDict[cleanHerbId]['lowPrice']))
+        print(itemDict[cleanHerbId]['name'].ljust(12) + ': ' + str(itemDict[cleanHerbId]['highPrice']-itemDict[grimyHerbId]['lowPrice']).rjust(3) + ' \tCurrent Prices: ' + getItemDetails(cleanHerbId) + ' ' + getItemDetails(grimyHerbId))
