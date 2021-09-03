@@ -13,7 +13,7 @@ with open('herbs.csv') as f:
     reader = csv.reader(f)
     next(reader)
 
-    print('Cleaning Herbs Margins')
+    print('Cleaning Herbs Calculator')
 
     for row in reader:
         cleanHerbId = int(row[0])
@@ -22,4 +22,17 @@ with open('herbs.csv') as f:
 
         #print(getItemDetails(cleanHerbId))
         #print(getItemDetails(grimyHerbId))
-        print(itemDict[cleanHerbId]['name'].ljust(12) + ': ' + str(itemDict[cleanHerbId]['highPrice']-itemDict[grimyHerbId]['lowPrice']).rjust(3) + ' \tCurrent Prices: ' + getItemDetails(cleanHerbId) + ' ' + getItemDetails(grimyHerbId))
+        print(itemDict[cleanHerbId]['name'].ljust(12) + ': ' + str(itemDict[cleanHerbId]['lowPrice']-itemDict[grimyHerbId]['highPrice']).rjust(3) + ' \tCurrent Prices: ' + getItemDetails(cleanHerbId) + ', ' + getItemDetails(grimyHerbId))
+
+with open('herbs.csv') as f:
+    reader = csv.reader(f)
+    next(reader)
+
+    print()
+    print('Unfinished Potions Calculator')
+
+    for row in reader:
+        cleanHerbId = int(row[0])
+        unfPotionId = int(row[3])
+
+        print(itemDict[unfPotionId]['name'].ljust(30) + ': ' + str(itemDict[unfPotionId]['lowPrice']-itemDict[cleanHerbId]['highPrice']).rjust(3) + ' \tCurrent Prices: ' + getItemDetails(cleanHerbId) + ', ' + getItemDetails(grimyHerbId))
