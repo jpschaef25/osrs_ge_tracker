@@ -35,4 +35,4 @@ with open('herbs.csv') as f:
         cleanHerbId = int(row[0])
         unfPotionId = int(row[3])
 
-        print(itemDict[unfPotionId]['name'].ljust(30) + ': ' + str(itemDict[unfPotionId]['lowPrice']-itemDict[cleanHerbId]['highPrice']).rjust(3) + ' \tCurrent Prices: ' + getItemDetails(cleanHerbId) + ', ' + getItemDetails(grimyHerbId))
+        print(itemDict[unfPotionId]['name'].ljust(30) + ': ' + str(itemDict[unfPotionId]['lowPrice']-itemDict[cleanHerbId]['highPrice']).rjust(3) + ' \tCurrent Prices: ' + getItemDetails(unfPotionId) + ', ' + getItemDetails(cleanHerbId))
