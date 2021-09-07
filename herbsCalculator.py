@@ -28,6 +28,9 @@ with open('herbs.csv') as f:
     reader = csv.reader(f)
     next(reader)
 
+    vialOfWaterId = 227
+    vialOfWaterPrice = itemDict[vialOfWaterId]['highPrice']
+
     print()
     print('Unfinished Potions Calculator')
 
@@ -35,4 +38,4 @@ with open('herbs.csv') as f:
         cleanHerbId = int(row[0])
         unfPotionId = int(row[3])
 
-        print(itemDict[unfPotionId]['name'].ljust(30) + ': ' + str(itemDict[unfPotionId]['lowPrice']-itemDict[cleanHerbId]['highPrice']).rjust(3) + ' \tCurrent Prices: ' + getItemDetails(unfPotionId) + ', ' + getItemDetails(cleanHerbId))
+        print(itemDict[unfPotionId]['name'].ljust(30) + ': ' + str(itemDict[unfPotionId]['lowPrice']-itemDict[cleanHerbId]['highPrice']-vialOfWaterPrice).rjust(3) + ' \tCurrent Prices: ' + getItemDetails(unfPotionId) + ', ' + getItemDetails(cleanHerbId))
