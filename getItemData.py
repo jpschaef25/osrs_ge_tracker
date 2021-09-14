@@ -21,9 +21,7 @@ def get_all_item_data():
     # Adds highPrice, highTime, lowPrice, lowTime to itemDict
     for item in itemList['data'].items():
         # Ignores any items that haven't been traded on GE
-        if item[1]['highTime'] is None or item[1]['lowTime'] is None:
-            print('Fake item')
-        else:
+        if item[1]['highTime'] is None or item[1]['lowTime'] is not None:
             itemId = int(item[0])
             itemDict[itemId] = {}
             itemDict[itemId]['highPrice'] = item[1]['high']
@@ -46,5 +44,4 @@ def get_all_item_data():
             if 'highalch' in mapping:
                 itemDict[itemId]['highAlch'] = mapping['highalch']
 
-    print('Item Dictionary Created')
     return itemDict
